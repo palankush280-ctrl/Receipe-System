@@ -1,0 +1,157 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="container mt-5">
+    <form class="col-6 mx-auto card p-3 shadow-lg" method="post" enctype = "multipart/form-data">
+        {% csrf_token %}
+        <h2>Add Receipes</h2>
+        <hr>
+  <div class="mb-3">
+    <label for="exampleInputEmail1" class="form-label">Receipe Name</label>
+    <input name = "receipe_name" required type="text" class="form-control">
+  </div>
+  <div class="mb-3">
+    <label for="exampleInputPassword1"class="form-label">Receipe Description</label>
+    <textarea class="form-control" name = "receipe_description" required></textarea>
+  </div>
+  <div class="mb-3">
+    <label for="exampleInputPassword1" class="form-label">Receipe Image</label>
+     <input name ="receipe_image" type="file" class="form-control">
+  
+  <button type="submit" class="btn btn-success w-100 mt-4">Add Receipes</button>
+</form>
+<hr>
+<div class="mt-5">
+    <div class="mx-auto col-6">
+        <div class="mb-3">
+            <form>
+            <label for="exampleInputEmail1" class="form-label">Search Food</label>
+    <input name = "search" type="text" class="form-control">
+        </div>
+        <button type="submit" class="btn btn-primary">Search</button>
+        </form>
+    </div>
+</div>
+
+   
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Recipe App</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f8f9fa;
+        }
+
+       
+        
+
+        /* TABLE SECTION */
+        .table-box {
+            width: 95%;
+            margin: 40px auto; /* separation from form */
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            table-layout: fixed;
+            background: white;
+        }
+
+        th {
+            background: #343a40;
+            color: white;
+            padding: 12px;
+            text-align: left;
+        }
+
+        td {
+            padding: 10px;
+            border: 1px solid #ddd;
+            vertical-align: top;
+            line-height: 1.5;
+        }
+
+        tr:hover {
+            background: #f1f1f1;
+        }
+
+        /* DESCRIPTION COLUMN */
+        .desc {
+            width: 45%;
+            word-wrap: break-word;
+        }
+        .action {
+            width:10%;
+        }
+
+        /* IMAGE */
+        td img {
+            width: 120px;
+            border-radius: 6px;
+        }
+    </style>
+
+</head>
+
+<body>
+
+   
+    </div>
+
+   
+    <div class="table-box">
+        <h2>Recipe List</h2>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Recipe Name</th>
+                    <th>Recipe Description</th>
+                    <th>Image</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                {% for receipe in receipes %}
+                <tr>
+                    <td>{{ forloop.counter }}</td>
+                    <td>{{ receipe.receipe_name }}</td>
+                    <td class="desc">{{ receipe.receipe_description }}</td>
+                    <td>
+                        {% if receipe.receipe_image %}
+                            <img src="{{ receipe.receipe_image.url }}">
+                        {% else %}
+                            No Image
+                        {% endif %}
+                    </td>
+                    <td>
+                      <a href="/delete-receipe/ {{receipe.id}}/" class ="btn btn-danger">Delete</button>
+                      <a href="/update-receipe/ {{receipe.id}}/" class ="btn btn-success">Update</button>  
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+
+        </table>
+    </div>
+
+</body>
+</html>
+
+
+
+
+
+</div>
+
+
+{% endblock %}
+
+
+
+
